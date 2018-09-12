@@ -1,0 +1,59 @@
+<% include partials/header %>
+
+    <div class="text-center container lead">
+      <h1 class=""><%= title %></h1>
+      <p>Welcome to <%= title %> <%= profile.userName %></p>
+
+    </div>
+
+    <div class="container jumbotron">
+
+      <div class="wrapper">
+
+        <form class="box text-center" action="/data" method="post">
+          <h2>Add Data Form</h2>
+
+          <div class="">
+            <label for="title">Title</label>
+            <input class="form-control"type="text" name="title" id="title" value="">
+          </div>
+
+          <div class="">
+            <label for="body">Body</label>
+            <input class="form-control"type="text" name="body" id="body" value="">
+          </div><br>
+          <div class="">
+            <button type="submit" class="btn " name="button">Add New Data</button>
+          </div>
+        </form>
+        <div style=""class="box text-center" id="formDisplay">
+          <% if(documents.length === 1) { %>
+            <p> You have <%= documents.length %> document available.</p>
+          <% } else {%>
+            <p> You have <%= documents.length %> documents available.</p>
+          <% } %>
+          <div class="" id="docDisplay">
+          <% if(documents.length > 0){ %>
+
+            <% documents.forEach(function(doc){ %>
+              <div class="doc" >
+                <h2><a href="/data/<%= doc.id %>" ><%= doc.title %></a></h2>
+
+                  <p> <%= doc.body.substr(0, 15) %><a href="/data/<%= doc.id %>">... read more</a> </p>
+                  <!-- <p><%= doc.id %></p> -->
+                  <form class="ctrl" action="/delete/<%= doc.id %>" method="post">
+                    <button class="btn"type="submit" data-toggle="tooltip" title="Are you sure ? This is permanent!">delete</button>
+                  </form>
+                  <form class="ctrl" action="/update/<%= doc.id %>" method="post">
+                    <button class="btn"type="submit">update</button>
+                  </form>
+              </div>
+            <% }); %>
+
+          <% } %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<% include partials/footer %>
