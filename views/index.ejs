@@ -4,6 +4,22 @@
       <h1 class=""><%= title %></h1>
       <p>Welcome to <%= title %> <%= profile.userName %></p>
 
+      <form class="box text-center" action="/newUser" method="post">
+        <h2>New User Form</h2>
+
+        <div class="">
+          <label for="email">Email</label>
+          <input class="form-control"type="email" name="email" id="email" value="">
+        </div>
+
+        <div class="">
+          <label for="password">Password</label>
+          <input class="form-control" type="password" name="password" id="password" value="">
+        </div><br>
+        <div class="">
+          <button type="submit" class="btn " >Add New User</button>
+        </div>
+      </form>
     </div>
 
     <div class="container jumbotron">
@@ -11,16 +27,16 @@
       <div class="wrapper">
 
         <form class="box text-center" action="/data" method="post">
-          <h2>Add Data Form</h2>
+          <h2>Journal Entry Form</h2>
 
           <div class="">
-            <label for="title">Title</label>
-            <input class="form-control"type="text" name="title" id="title" value="">
+            <label for="subject">Subject</label>
+            <input class="form-control"type="text" name="subject" id="subject" value="">
           </div>
 
           <div class="">
             <label for="body">Body</label>
-            <input class="form-control"type="text" name="body" id="body" value="">
+            <textarea class="form-control" name="body"id="body" rows="8" cols="60"></textarea>
           </div><br>
           <div class="">
             <button type="submit" class="btn " name="button">Add New Data</button>
@@ -37,9 +53,9 @@
 
             <% documents.forEach(function(doc){ %>
               <div class="doc" >
-                <h2><a href="/data/<%= doc.id %>" ><%= doc.title %></a></h2>
+                <h2><a href="/data/<%= doc.id %>" ><%= doc.subject %></a></h2>
 
-                  <p> <%= doc.body.substr(0, 15) %><a href="/data/<%= doc.id %>">... read more</a> </p>
+                  <p style="font-size: 18px;">Published: <%= doc.date %></p>
                   <!-- <p><%= doc.id %></p> -->
                   <form class="ctrl" action="/delete/<%= doc.id %>" method="post">
                     <button class="btn"type="submit" data-toggle="tooltip" title="Are you sure ? This is permanent!">delete</button>
